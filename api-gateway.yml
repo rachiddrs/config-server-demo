@@ -1,0 +1,45 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8765
+
+spring:
+  application:
+    name: api-gateway
+
+  # Enables automatic service discovery for Spring Cloud Gateway,
+  # allowing it to dynamically route requests to services registered in Eureka.
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+        - id: quiz-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/quiz/**
+
+          # Example for load-balanced URI (commented out):
+          # uri: lb://quiz-service
+          # predicates:
+          #   - Path=/QUIZ-SERVICE/**
+          # filters:
+          #   - RewritePath=/QUIZ-SERVICE/(?<segment>.*), /${segment}
+
+    # Disables Spring Cloud Config, indicating the application will not use centralized configuration.
+    config:
+      enabled: false
+
+# Logging configuration for debugging (uncomment if needed)
+# logging:
+#   level:
+#     org.springframework.cloud.gateway: DEBUG
+#     org.springframework.cloud: DEBUG
