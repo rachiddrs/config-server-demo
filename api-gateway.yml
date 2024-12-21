@@ -11,8 +11,6 @@ server:
 spring:
   application:
     name: api-gateway
-  main:
-    web-application-type: reactive
 
   # Enables automatic service discovery for Spring Cloud Gateway,
   # allowing it to dynamically route requests to services registered in Eureka.
