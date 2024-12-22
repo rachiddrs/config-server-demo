@@ -10,5 +10,5 @@ spring:
     name: quiz-service
   
 
-server:
-  port: 8090
+#server:
+ # port: 8090
